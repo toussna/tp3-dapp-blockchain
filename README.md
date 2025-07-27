@@ -32,9 +32,4 @@ Ce projet comprend **8 exercices**, chacun représenté par un contrat et une in
 
 ---
 
-## ▶️ Lancement du projet
 
-### 1. Cloner le dépôt ou décompresser le `.zip`
-```bash
-git clone https://github.com/votre-nom-utilisateur/nom-du-repo.git
-cd nom-du-repo
