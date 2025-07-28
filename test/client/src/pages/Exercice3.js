@@ -10,6 +10,7 @@ export default function Exercice3() {
   const [chaineA, setChaineA] = useState("");
   const [chaineB, setChaineB] = useState("");
   const [result, setResult] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0); // Pour rafraîchir BlockchainInfo
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -17,6 +18,7 @@ export default function Exercice3() {
     const accounts = await web3.eth.getAccounts();
     await gestionChainesContract.methods.setMessage(nouveauMessage).send({ from: accounts[0] });
     setResult("Message mis à jour !");
+    setRefreshKey(prev => prev + 1); // Mettre à jour BlockchainInfo
   };
 
   const handleGetMessage = async () => {
@@ -130,7 +132,7 @@ export default function Exercice3() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo />
+          <BlockchainInfo refreshKey={refreshKey} /> {/* Mis à jour */}
         </div>
       </div>
     </div>

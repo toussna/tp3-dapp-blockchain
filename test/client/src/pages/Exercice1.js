@@ -8,6 +8,7 @@ export default function Exercice1() {
   const [nombre1, setNombre1] = useState(0);
   const [nombre2, setNombre2] = useState(0);
   const [result, setResult] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0); // Ajouté pour forcer le rechargement de BlockchainInfo
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -39,6 +40,7 @@ export default function Exercice1() {
       const b = parseInt(nombre2);
       const accounts = await web3.eth.getAccounts();
       await additionContract.methods.setNombres(a, b).send({ from: accounts[0] });
+      setRefreshKey(prev => prev + 1); // Rafraîchir BlockchainInfo après la transaction
     } catch (err) {
       setResult("Erreur lors de l'appel à setNombres()");
     }
@@ -49,7 +51,7 @@ export default function Exercice1() {
       {/* Titre principal */}
       <div className="w-full text-center py-6" style={{ backgroundColor: "rgb(25, 56, 140)" }}>
         <h3 className="text-3xl font-bold mb-4" style={{ color: "rgb(255, 253, 244)" }}>
-          Exercice 3: Traitement des chaînes de caractères
+          Exercice 1 : Somme de deux variables
         </h3>
       </div>
 
@@ -96,7 +98,7 @@ export default function Exercice1() {
             className="bg-purple-600 text-white px-6 py-2 rounded hover:bg-purple-700"
           >
             setNombres (view)
-          </button>          
+          </button>
         </div>
       </div>
 
@@ -127,7 +129,7 @@ export default function Exercice1() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo />
+          <BlockchainInfo refreshKey={refreshKey} /> {/* Prop ajoutée */}
         </div>
       </div>
     </div>

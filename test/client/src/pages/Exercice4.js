@@ -24,7 +24,7 @@ export default function Exercice4() {
       {/* Titre principal */}
       <div className="w-full text-center py-6" style={{ backgroundColor: "rgb(25, 56, 140)" }}>
         <h3 className="text-3xl font-bold mb-4" style={{ color: "rgb(255, 253, 244)" }}>
-          Exercice 4 : Vérification de positivité
+          Exercice 4 : Tester le signe d'un nombre
         </h3>
       </div>
 
@@ -81,7 +81,7 @@ export default function Exercice4() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo />
+          <BlockchainInfo /> {/* plus de refreshKey */}
         </div>
       </div>
     </div>

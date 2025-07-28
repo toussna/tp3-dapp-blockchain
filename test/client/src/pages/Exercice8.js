@@ -7,6 +7,7 @@ import paymentContract from "../contracts/paymentContract";
 export default function Exercice8() {
   const [montant, setMontant] = useState(0);
   const [result, setResult] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0); //  Pour recharger BlockchainInfo
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -15,10 +16,11 @@ export default function Exercice8() {
     try {
       const accounts = await web3.eth.getAccounts();
       await paymentContract.methods.receivePayment().send({
-        from: accounts[0], // envoie depuis le premier compte
+        from: accounts[0],
         value: web3.utils.toWei(montant, "ether"),
       });
       setResult(`${montant} Ether envoyé depuis ${accounts[0]}`);
+      setRefreshKey(prev => prev + 1); //  Rafraîchit après envoi
     } catch (err) {
       console.error("Erreur paiement :", err);
       setResult("Erreur lors de l'envoi du paiement");
@@ -38,6 +40,7 @@ export default function Exercice8() {
 
       await paymentContract.methods.withdraw().send({ from: accounts[1] });
       setResult(`Fonds retirés par le destinataire : ${accounts[1]}`);
+      setRefreshKey(prev => prev + 1); //  Rafraîchit après retrait
     } catch (err) {
       console.error("Erreur retrait :", err);
       setResult("Erreur lors du retrait. Vérifie que tu es le destinataire.");
@@ -76,7 +79,7 @@ export default function Exercice8() {
     <div className="min-h-screen px-6" style={{ backgroundColor: "rgba(12, 12, 11, 1)" }}>
       <div className="w-full text-center py-6" style={{ backgroundColor: "rgb(25, 56, 140)" }}>
         <h3 className="text-3xl font-bold mb-4" style={{ color: "rgb(255, 253, 244)" }}>
-          Exercice 8 : Paiement et retrait sécurisé
+          Exercice 8 : Utilisation des variables globales (msg.sender et msg.value)
         </h3>
       </div>
 
@@ -138,7 +141,7 @@ export default function Exercice8() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo />
+          <BlockchainInfo refreshKey={refreshKey} /> {/* actualisé après send() */}
         </div>
       </div>
     </div>

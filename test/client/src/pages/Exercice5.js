@@ -26,7 +26,7 @@ export default function Exercice5() {
       {/* Titre */}
       <div className="w-full text-center py-6" style={{ backgroundColor: "rgb(25, 56, 140)" }}>
         <h3 className="text-3xl font-bold mb-4" style={{ color: "rgb(255, 253, 244)" }}>
-          Exercice 5 : Vérification de la parité
+          Exercice 5 : Tester la parité d'un nombre
         </h3>
       </div>
 

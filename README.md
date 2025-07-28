@@ -1,11 +1,11 @@
 # Développement d’une dApp pour le TP 3
 
-🎯 Ce projet consiste à développer une application décentralisée (dApp) en ReactJS, qui interagit avec une série de contrats intelligents (Smart Contracts) développés en Solidity.  
+  Ce projet consiste à développer une application décentralisée (dApp) en ReactJS, qui interagit avec une série de contrats intelligents (Smart Contracts) développés en Solidity.  
 Il s’inscrit dans le cadre du **TP 3 du module Blockchain & Web3** (Master GLCC 2024/2025).
 
 ---
 
-## 🛠️ Technologies utilisées
+## Technologies utilisées
 
 - Solidity (v0.8.x)
 - Truffle Suite
@@ -15,7 +15,7 @@ Il s’inscrit dans le cadre du **TP 3 du module Blockchain & Web3** (Master GLC
 
 ---
 
-## 📚 Contenu du projet
+## Contenu du projet
 
 Ce projet comprend **8 exercices**, chacun représenté par un contrat et une interface React dédiée :
 

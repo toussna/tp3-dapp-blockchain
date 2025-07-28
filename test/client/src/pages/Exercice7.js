@@ -8,6 +8,7 @@ export default function Exercice7() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [taille, setTaille] = useState({ lo: 0, la: 0 });
   const [result, setResult] = useState("");
+  const [refreshKey, setRefreshKey] = useState(0); // Pour recharger BlockchainInfo
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -16,28 +17,25 @@ export default function Exercice7() {
     setResult(info);
   };
 
-const afficherCoordonnees = async () => {
-  try {
-    const coords = await rectangleContract.methods.afficheXY().call();
-    // coords est un objet : { '0': x, '1': y }
-    setResult(`Coordonnées : x = ${coords[0]}, y = ${coords[1]}`);
-  } catch (err) {
-    console.error("Erreur afficheXY :", err);
-    setResult("Erreur lors de l'appel à afficheXY()");
-  }
-};
+  const afficherCoordonnees = async () => {
+    try {
+      const coords = await rectangleContract.methods.afficheXY().call();
+      setResult(`Coordonnées : x = ${coords[0]}, y = ${coords[1]}`);
+    } catch (err) {
+      console.error("Erreur afficheXY :", err);
+      setResult("Erreur lors de l'appel à afficheXY()");
+    }
+  };
 
-
-const afficherDimensions = async () => {
-  try {
-    const dims = await rectangleContract.methods.afficheLoLa().call();
-    setResult(`Dimensions : longueur = ${dims[0]}, largeur = ${dims[1]}`);
-  } catch (err) {
-    console.error("Erreur afficheLoLa :", err);
-    setResult("Erreur lors de l'appel à afficheLoLa()");
-  }
-};
-
+  const afficherDimensions = async () => {
+    try {
+      const dims = await rectangleContract.methods.afficheLoLa().call();
+      setResult(`Dimensions : longueur = ${dims[0]}, largeur = ${dims[1]}`);
+    } catch (err) {
+      console.error("Erreur afficheLoLa :", err);
+      setResult("Erreur lors de l'appel à afficheLoLa()");
+    }
+  };
 
   const calculerSurface = async () => {
     const surface = await rectangleContract.methods.surface().call();
@@ -45,18 +43,25 @@ const afficherDimensions = async () => {
   };
 
   const deplacer = async () => {
-    const accounts = await web3.eth.getAccounts();
-    await rectangleContract.methods
-      .deplacerForme(coords.x, coords.y)
-      .send({ from: accounts[0] });
-    setResult("Forme déplacée !");
+    try {
+      const accounts = await web3.eth.getAccounts();
+      await rectangleContract.methods
+        .deplacerForme(coords.x, coords.y)
+        .send({ from: accounts[0] });
+
+      setResult("Forme déplacée !");
+      setRefreshKey(prev => prev + 1); //  Mise à jour BlockchainInfo
+    } catch (err) {
+      console.error("Erreur deplacement :", err);
+      setResult("Erreur lors de l'appel à deplacerForme()");
+    }
   };
 
   return (
     <div className="min-h-screen px-6" style={{ backgroundColor: "rgba(12, 12, 11, 1)" }}>
       <div className="w-full text-center py-6" style={{ backgroundColor: "rgb(25, 56, 140)" }}>
         <h3 className="text-3xl font-bold mb-4" style={{ color: "rgb(255, 253, 244)" }}>
-          Exercice 7 : Programmation orientée objet
+          Exercice 7 : Programmation Orientée Objet (Formes géométriques)
         </h3>
       </div>
 
@@ -129,7 +134,7 @@ const afficherDimensions = async () => {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo />
+          <BlockchainInfo refreshKey={refreshKey} /> {/*  Met à jour après déplacement */}
         </div>
       </div>
     </div>

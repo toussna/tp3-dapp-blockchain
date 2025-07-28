@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from "react";
 import Web3 from "web3";
 
-export default function BlockchainInfo() {
+export default function BlockchainInfo({ refreshKey }) {
   const [account, setAccount] = useState("");
   const [networkId, setNetworkId] = useState("");
   const [block, setBlock] = useState({});
   const [tx, setTx] = useState(null);
+  const [lastTxIndex, setLastTxIndex] = useState(null);
+  const [accountTxCount, setAccountTxCount] = useState(0); // 🆕 total des transactions du compte
 
   useEffect(() => {
     const init = async () => {
       const web3 = new Web3("http://127.0.0.1:7545");
 
       const accounts = await web3.eth.getAccounts();
-      setAccount(accounts[0]);
+      const currentAccount = accounts[0];
+      setAccount(currentAccount);
 
       const netId = await web3.eth.net.getId();
       setNetworkId(netId);
@@ -20,14 +23,23 @@ export default function BlockchainInfo() {
       const latestBlock = await web3.eth.getBlock("latest", true);
       setBlock(latestBlock);
 
+      // 🔢 Obtenir le nombre total de transactions depuis le compte actif
+      const txCount = await web3.eth.getTransactionCount(currentAccount);
+      setAccountTxCount(txCount);
+
       if (latestBlock.transactions.length > 0) {
-        const txData = latestBlock.transactions[0];
+        const index = latestBlock.transactions.length - 1;
+        const txData = latestBlock.transactions[index];
+        setLastTxIndex(index);
         setTx(txData);
+      } else {
+        setLastTxIndex(null);
+        setTx(null);
       }
     };
 
     init();
-  }, []);
+  }, [refreshKey]);
 
   return (
     <div className="flex flex-col md:flex-row w-full gap-6 text-sm md:text-xs">
@@ -42,6 +54,7 @@ export default function BlockchainInfo() {
         </div>
         <div className="mb-3 p-3 border rounded bg-gray-50">
           <p><strong>Compte:</strong> {account}</p>
+          <p><strong>Transactions envoyées :</strong> {accountTxCount}</p> {/* 🆕 */}
         </div>
         <div className="p-3 border rounded bg-gray-50 overflow-x-auto">
           <p><strong>Bloc #</strong> {block.number}</p>
@@ -61,8 +74,9 @@ export default function BlockchainInfo() {
       {/* Partie droite */}
       <div className="md:w-1/2 w-full p-4 bg-white rounded shadow-md">
         <h3 className="text-lg font-semibold mb-4" style={{ color: "rgb(0, 12, 103)" }}>
-          Détails de la Transaction #1
+          Détails de la dernière Transaction {lastTxIndex !== null ? `#${lastTxIndex}` : "(Aucune transaction)"}
         </h3>
+
         {tx ? (
           <div className="p-3 border rounded bg-gray-50 overflow-x-auto">
             <p><strong>Expéditeur:</strong> {tx.from}</p>

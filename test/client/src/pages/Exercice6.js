@@ -6,8 +6,10 @@ import listeNombresContract from "../contracts/listeNombresContract";
 
 export default function Exercice6() {
   const [nombre, setNombre] = useState(0);
+  const [index, setIndex] = useState("");
   const [result, setResult] = useState("");
   const [tableau, setTableau] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(0); // clé pour recharger BlockchainInfo
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -17,6 +19,7 @@ export default function Exercice6() {
       await listeNombresContract.methods.ajouterNombre(parseInt(nombre)).send({ from: accounts[0] });
       setResult(`Nombre ${nombre} ajouté`);
       setNombre(0);
+      setRefreshKey(prev => prev + 1); // déclenche la mise à jour
       await chargerTableau();
     } catch (err) {
       console.error(err);
@@ -25,13 +28,34 @@ export default function Exercice6() {
   };
 
   const chargerTableau = async () => {
-    const tab = await listeNombresContract.methods.afficheTableau().call();
-    setTableau(tab);
+    try {
+      const tab = await listeNombresContract.methods.afficheTableau().call();
+      setTableau(tab);
+      setResult("Tableau mis à jour !");
+    } catch (err) {
+      console.error(err);
+      setResult("Erreur lors de l'affichage du tableau");
+    }
   };
 
   const somme = async () => {
-    const s = await listeNombresContract.methods.calculerSomme().call();
-    setResult(`Somme du tableau = ${s}`);
+    try {
+      const s = await listeNombresContract.methods.calculerSomme().call();
+      setResult(`Somme du tableau = ${s}`);
+    } catch (err) {
+      console.error(err);
+      setResult("Erreur lors du calcul de la somme");
+    }
+  };
+
+  const getElement = async () => {
+    try {
+      const value = await listeNombresContract.methods.getElement(index).call();
+      setResult(`Élément à l'indice ${index} = ${value}`);
+    } catch (err) {
+      console.error(err);
+      setResult("Index invalide ou erreur lors de getElement()");
+    }
   };
 
   useEffect(() => {
@@ -42,15 +66,16 @@ export default function Exercice6() {
     <div className="min-h-screen px-6" style={{ backgroundColor: "rgba(12, 12, 11, 1)" }}>
       <div className="w-full text-center py-6" style={{ backgroundColor: "rgb(25, 56, 140)" }}>
         <h3 className="text-3xl font-bold mb-4" style={{ color: "rgb(255, 253, 244)" }}>
-          Exercice 6 : Tableau dynamique et somme
+          Exercice 6 : Gestion des tableaux
         </h3>
       </div>
 
+      {/* Zone de saisie */}
       <div className="w-full text-center py-4 mb-2" style={{ backgroundColor: "rgb(192, 195, 198)" }}>
         <div className="text-base font-semibold mb-2" style={{ color: "rgb(0, 12, 103)" }}>
           Ajouter un nombre :
         </div>
-        <div className="flex justify-center flex-wrap gap-4">
+        <div className="flex justify-center flex-wrap gap-4 mb-3">
           <input
             type="number"
             value={nombre}
@@ -64,16 +89,32 @@ export default function Exercice6() {
           <button onClick={somme} className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
             Calculer Somme
           </button>
+          <button onClick={chargerTableau} className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+            Afficher Tableau
+          </button>
+        </div>
+
+        <div className="text-base font-semibold mb-2" style={{ color: "rgb(0, 12, 103)" }}>
+          Afficher un élément par son index :
+        </div>
+        <div className="flex justify-center flex-wrap gap-4">
+          <input
+            type="number"
+            value={index}
+            onChange={(e) => setIndex(e.target.value)}
+            className="border rounded p-2 w-40 text-center"
+            placeholder="Index"
+          />
+          <button onClick={getElement} className="bg-yellow-600 text-black px-4 py-2 rounded hover:bg-yellow-700">
+            Obtenir Élément
+          </button>
         </div>
       </div>
 
       {/* Résultat */}
       {result && (
         <div className="w-full mb-4">
-          <div
-            className="w-full px-6 py-4 rounded shadow-md"
-            style={{ backgroundColor: "rgb(220, 230, 104)" }}
-          >
+          <div className="w-full px-6 py-4 rounded shadow-md" style={{ backgroundColor: "rgb(220, 230, 104)" }}>
             <p className="text-lg font-semibold text-center" style={{ color: "rgb(187, 41, 32)" }}>
               {result}
             </p>
@@ -81,7 +122,7 @@ export default function Exercice6() {
         </div>
       )}
 
-      {/* Affichage tableau */}
+      {/* Affichage du tableau */}
       <div className="w-full text-center mb-4">
         <h4 className="text-lg font-semibold text-white mb-2">Contenu du tableau :</h4>
         <div className="text-white text-sm">
@@ -102,7 +143,7 @@ export default function Exercice6() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo />
+          <BlockchainInfo refreshKey={refreshKey} /> {/* actualise automatiquement */}
         </div>
       </div>
     </div>
