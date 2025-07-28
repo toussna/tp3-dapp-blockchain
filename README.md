@@ -15,11 +15,19 @@ L’objectif est de fournir une interface pédagogique et fonctionnelle pour tes
 ## Contenu du projet
 
 L'application couvre les huit exercices du TP 3. Chaque exercice est représenté par un contrat spécifique et une interface utilisateur dédiée développée en ReactJS. Voici les thèmes abordés :
-•	Exercice 1 : Addition de deux nombres (variables d’état, view, pure)
-•	Exercice 2 : Conversion entre Ether et Wei
-•	Exercice 3 : Manipulation de chaînes de caractères
-•	Exercice 4 : Vérification si un nombre est positif
-•	Exercice 5 : Vérification de la parité (pair ou impair)
-•	Exercice 6 : Tableau dynamique avec calcul de la somme
-•	Exercice 7 : Héritage et abstraction avec Forme/Rectangle
-•	Exercice 8 : Paiement et retrait sécurisé (msg.sender, msg.value)
+
+
+| Exercice | Sujet |
+|---------|-------|
+| Exercice 1 | Addition de deux nombres (state, view, pure) |
+| Exercice 2 | Conversion Ether ↔ Wei |
+| Exercice 3 | Gestion des chaînes de caractères |
+| Exercice 4 | Vérification de positivité d’un entier |
+| Exercice 5 | Vérification de la parité (pair/impair) |
+| Exercice 6 | Tableau dynamique et somme |
+| Exercice 7 | Programmation orientée objet (Forme / Rectangle) |
+| Exercice 8 | Paiement et retrait sécurisé (`msg.sender`, `msg.value`) |
+
+---
+
+
