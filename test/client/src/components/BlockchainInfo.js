@@ -7,7 +7,7 @@ export default function BlockchainInfo({ refreshKey }) {
   const [block, setBlock] = useState({});
   const [tx, setTx] = useState(null);
   const [lastTxIndex, setLastTxIndex] = useState(null);
-  const [accountTxCount, setAccountTxCount] = useState(0); // 🆕 total des transactions du compte
+  const [accountTxCount, setAccountTxCount] = useState(0); //  total des transactions du compte
 
   useEffect(() => {
     const init = async () => {
@@ -23,7 +23,7 @@ export default function BlockchainInfo({ refreshKey }) {
       const latestBlock = await web3.eth.getBlock("latest", true);
       setBlock(latestBlock);
 
-      // 🔢 Obtenir le nombre total de transactions depuis le compte actif
+      //  Obtenir le nombre total de transactions depuis le compte actif
       const txCount = await web3.eth.getTransactionCount(currentAccount);
       setAccountTxCount(txCount);
 
@@ -54,7 +54,7 @@ export default function BlockchainInfo({ refreshKey }) {
         </div>
         <div className="mb-3 p-3 border rounded bg-gray-50">
           <p><strong>Compte:</strong> {account}</p>
-          <p><strong>Transactions envoyées :</strong> {accountTxCount}</p> {/* 🆕 */}
+          <p><strong>Transactions envoyées :</strong> {accountTxCount}</p> {/*  */}
         </div>
         <div className="p-3 border rounded bg-gray-50 overflow-x-auto">
           <p><strong>Bloc #</strong> {block.number}</p>
