@@ -6,7 +6,7 @@ import "./Forme.sol";
 contract Rectangle is Forme {
     uint public lo;
     uint public la;
-
+ 
     constructor(uint _x, uint _y, uint _lo, uint _la) Forme(_x, _y) {
         lo = _lo;
         la = _la;

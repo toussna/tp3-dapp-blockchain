@@ -9,7 +9,7 @@ export default function Exercice6() {
   const [index, setIndex] = useState("");
   const [result, setResult] = useState("");
   const [tableau, setTableau] = useState([]);
-  const [refreshKey, setRefreshKey] = useState(0); // clé pour recharger BlockchainInfo
+  const [refreshKey, setRefreshKey] = useState(0);  
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -19,7 +19,7 @@ export default function Exercice6() {
       await listeNombresContract.methods.ajouterNombre(parseInt(nombre)).send({ from: accounts[0] });
       setResult(`Nombre ${nombre} ajouté`);
       setNombre(0);
-      setRefreshKey(prev => prev + 1); // déclenche la mise à jour
+      setRefreshKey(prev => prev + 1);  
       await chargerTableau();
     } catch (err) {
       console.error(err);
@@ -143,7 +143,7 @@ export default function Exercice6() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo refreshKey={refreshKey} /> {/* actualise automatiquement */}
+          <BlockchainInfo refreshKey={refreshKey} />  
         </div>
       </div>
     </div>

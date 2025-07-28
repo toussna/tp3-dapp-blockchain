@@ -6,3 +6,4 @@ contract Parite {
         return nombre % 2 == 0;
     }
 }
+ 

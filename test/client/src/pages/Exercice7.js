@@ -8,7 +8,7 @@ export default function Exercice7() {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
   const [taille, setTaille] = useState({ lo: 0, la: 0 });
   const [result, setResult] = useState("");
-  const [refreshKey, setRefreshKey] = useState(0); // Pour recharger BlockchainInfo
+  const [refreshKey, setRefreshKey] = useState(0);  
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -50,7 +50,7 @@ export default function Exercice7() {
         .send({ from: accounts[0] });
 
       setResult("Forme déplacée !");
-      setRefreshKey(prev => prev + 1); //  Mise à jour BlockchainInfo
+      setRefreshKey(prev => prev + 1);  
     } catch (err) {
       console.error("Erreur deplacement :", err);
       setResult("Erreur lors de l'appel à deplacerForme()");
@@ -134,7 +134,7 @@ export default function Exercice7() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo refreshKey={refreshKey} /> {/*  Met à jour après déplacement */}
+          <BlockchainInfo refreshKey={refreshKey} />  
         </div>
       </div>
     </div>

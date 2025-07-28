@@ -81,7 +81,7 @@ export default function Exercice4() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo /> {/* plus de refreshKey */}
+          <BlockchainInfo />  
         </div>
       </div>
     </div>

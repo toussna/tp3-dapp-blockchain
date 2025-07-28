@@ -8,7 +8,7 @@ export default function Exercice1() {
   const [nombre1, setNombre1] = useState(0);
   const [nombre2, setNombre2] = useState(0);
   const [result, setResult] = useState("");
-  const [refreshKey, setRefreshKey] = useState(0); // Ajouté pour forcer le rechargement de BlockchainInfo
+  const [refreshKey, setRefreshKey] = useState(0);  
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -123,13 +123,12 @@ export default function Exercice1() {
         </Link>
       </div>
 
-      {/* SECTION BASSE PLEIN ÉCRAN AVEC MARGE */}
       <div className="w-full bg-gray-100 px-[4%] py-2">
         <div className="max-w-[98vw] mx-auto">
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo refreshKey={refreshKey} /> {/* Prop ajoutée */}
+          <BlockchainInfo refreshKey={refreshKey} />  
         </div>
       </div>
     </div>

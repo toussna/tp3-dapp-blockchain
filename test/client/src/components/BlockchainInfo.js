@@ -8,7 +8,7 @@ export default function BlockchainInfo({ refreshKey }) {
   const [tx, setTx] = useState(null);
   const [lastTxIndex, setLastTxIndex] = useState(null);
   const [accountTxCount, setAccountTxCount] = useState(0); //  total des transactions du compte
-
+ 
   useEffect(() => {
     const init = async () => {
       const web3 = new Web3("http://127.0.0.1:7545");

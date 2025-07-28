@@ -7,7 +7,7 @@ import paymentContract from "../contracts/paymentContract";
 export default function Exercice8() {
   const [montant, setMontant] = useState(0);
   const [result, setResult] = useState("");
-  const [refreshKey, setRefreshKey] = useState(0); //  Pour recharger BlockchainInfo
+  const [refreshKey, setRefreshKey] = useState(0);  
 
   const web3 = new Web3("http://127.0.0.1:7545");
 
@@ -20,7 +20,7 @@ export default function Exercice8() {
         value: web3.utils.toWei(montant, "ether"),
       });
       setResult(`${montant} Ether envoyé depuis ${accounts[0]}`);
-      setRefreshKey(prev => prev + 1); //  Rafraîchit après envoi
+      setRefreshKey(prev => prev + 1);  
     } catch (err) {
       console.error("Erreur paiement :", err);
       setResult("Erreur lors de l'envoi du paiement");
@@ -40,7 +40,7 @@ export default function Exercice8() {
 
       await paymentContract.methods.withdraw().send({ from: accounts[1] });
       setResult(`Fonds retirés par le destinataire : ${accounts[1]}`);
-      setRefreshKey(prev => prev + 1); //  Rafraîchit après retrait
+      setRefreshKey(prev => prev + 1);  
     } catch (err) {
       console.error("Erreur retrait :", err);
       setResult("Erreur lors du retrait. Vérifie que tu es le destinataire.");
@@ -69,7 +69,7 @@ export default function Exercice8() {
     }
   };
 
-  // Bouton debug : liste des comptes utilisés
+  //  liste des comptes utilisés
   const afficherComptes = async () => {
     const accounts = await web3.eth.getAccounts();
     setResult(`Comptes Ganache :\naccounts[0] = ${accounts[0]}\naccounts[1] = ${accounts[1]}`);
@@ -141,7 +141,7 @@ export default function Exercice8() {
           <h2 className="text-xl font-bold text-center mb-2" style={{ color: "rgb(0, 12, 103)" }}>
             Informations Blockchain
           </h2>
-          <BlockchainInfo refreshKey={refreshKey} /> {/* actualisé après send() */}
+          <BlockchainInfo refreshKey={refreshKey} />  
         </div>
       </div>
     </div>

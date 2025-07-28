@@ -7,7 +7,7 @@ contract GestionChaines {
     function setMessage(string memory nouveauMessage) public {
         message = nouveauMessage;
     }
-
+ 
     function getMessage() public view returns (string memory) {
         return message;
     }

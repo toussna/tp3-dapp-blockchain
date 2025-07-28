@@ -1,7 +1,7 @@
 {
   "contractName": "Parite",
   "abi": [
-    {
+    { 
       "inputs": [
         {
           "internalType": "int256",

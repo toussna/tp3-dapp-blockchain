@@ -7,7 +7,7 @@ contract Payment {
     constructor(address _recipient) {
         recipient = _recipient;
     }
-
+ 
     function receivePayment() public payable {
         require(msg.value > 0, "Montant nul interdit");
     }

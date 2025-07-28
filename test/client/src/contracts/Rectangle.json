@@ -1,7 +1,7 @@
 {
   "contractName": "Rectangle",
   "abi": [
-    {
+    { 
       "inputs": [
         {
           "internalType": "uint256",

@@ -10,7 +10,7 @@ import Exercice6 from "./pages/Exercice6";
 import Exercice7 from "./pages/Exercice7";
 import Exercice8 from "./pages/Exercice8";
 
-export default function App() {
+export default function App() { 
   return (
     <Router>
       <Routes>

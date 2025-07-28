@@ -3,7 +3,7 @@
 Ce projet constitue le prolongement pratique du TP 3 du module Blockchain & Web3 (Master GLCC – Année Universitaire 2024/2025). Il vise à développer une application décentralisée (dApp) à l’aide de ReactJS, permettant d’interagir avec des contrats intelligents (smart contracts) écrits en Solidity.
 
 L’objectif est de fournir une interface pédagogique et fonctionnelle pour tester les concepts abordés en cours et en travaux pratiques.
-
+ 
 ## Technologies utilisées
 
 - Solidity (v0.8.x) – Langage des contrats intelligents

@@ -1,7 +1,7 @@
 {
   "contractName": "Payment",
   "abi": [
-    {
+    { 
       "inputs": [
         {
           "internalType": "address",

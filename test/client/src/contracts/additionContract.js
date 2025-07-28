@@ -7,3 +7,4 @@ const contract = new web3.eth.Contract(Addition.abi, contractAddress);
 
 export default contract;
 
+ 

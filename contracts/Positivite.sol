@@ -6,3 +6,4 @@ contract Positivite {
         return nombre >= 0;
     }
 }
+ 

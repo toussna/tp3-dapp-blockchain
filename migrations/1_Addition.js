@@ -6,3 +6,4 @@ module.exports = async function (deployer) {
     
     await additionInstance.setNombres(5, 3);
 };
+ 

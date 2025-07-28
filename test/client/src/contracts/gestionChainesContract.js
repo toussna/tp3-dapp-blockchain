@@ -6,3 +6,4 @@ const contractAddress = "0x851664d807675946ACA45D3098dd416217BC3065";
 const contract = new web3.eth.Contract(GestionChaines.abi, contractAddress);
 
 export default contract;
+ 
